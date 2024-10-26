@@ -16,7 +16,11 @@ if(mysqli_num_rows($validarLogin) > 0){
     $_SESSION['username'] = $usuario['email']; // Almacena el email o nombre de usuario
     $_SESSION['id'] = $usuario['id']; // Almacena el ID del usuario
     
-    header("location: ../index_login.php");
+    echo '
+        <script>
+        window.location = "../index_login.php";
+        </script>
+    ';  
     exit();
 } else {
     echo '

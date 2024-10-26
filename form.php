@@ -3,7 +3,11 @@
     session_start();
 
     if (isset($_SESSION['username'])) {
-        header("location: index_login.php");
+        echo '
+        <script>
+        window.location = "../index_login.php";
+        </script>
+    ';  
     }
 ?>
 

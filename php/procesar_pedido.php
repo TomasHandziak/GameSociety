@@ -46,7 +46,11 @@ if ($result->num_rows > 0) {
 
                 // Ejecutar la consulta
                 if ($stmtDetalle->execute()) {
-                    header("location: ../confirmacion.php");
+                    echo '
+                        <script>
+                        window.location = "../confirmacion.php";
+                        </script>
+                    ';  
                 } else {
                     echo "Error al registrar los detalles del pedido: " . $stmtDetalle->error;
                 }
