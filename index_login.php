@@ -127,12 +127,7 @@
 
         <div id="productContainer" class="table-view">
             <?php
-                $servername = "localhost"; 
-                $username = "root";        
-                $password = "";            
-                $dbname = "gamesociety";     
-
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = mysqli_connect("junction.proxy.rlwy.net", "root", "WqyHgwxnQkrHoyLvRAMYzRmWyXfaNoKi", "railway", 59235);
 
                 $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos";
                 $result = $conn->query($sql);
