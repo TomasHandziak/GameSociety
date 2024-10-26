@@ -127,21 +127,18 @@
 
         <div id="productContainer" class="table-view">
             <?php
-                // Conexión a la base de datos
-                $servername = "localhost"; // Cambiar por tu servidor
-                $username = "root";        // Cambiar por tu usuario
-                $password = "";            // Cambiar por tu contraseña
-                $dbname = "gamesociety";      // Cambiar por el nombre de tu base de datos
+                $servername = "localhost"; 
+                $username = "root";        
+                $password = "";            
+                $dbname = "gamesociety";     
 
-                // Crear la conexión
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
                 $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos";
                 $result = $conn->query($sql);
                 
-                // Verificar si hay resultados
+                
                 if ($result->num_rows > 0) {
-                    // Generar el HTML para cada producto
                     while($row = $result->fetch_assoc()) {
                         echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
                         echo '<img src="files/productos/' . $row['imagen'] . '" alt="' . $row['nombre'] . '">';
