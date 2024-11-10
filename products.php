@@ -92,31 +92,34 @@
 
         <div id="productContainer" class="table-view">
             <?php
-                // Crear la conexión
-                $conn = mysqli_connect("junction.proxy.rlwy.net", "root", "WqyHgwxnQkrHoyLvRAMYzRmWyXfaNoKi", "railway", 59235);
+                 // Crear la conexión
+                 $conn = new mysqli("autorack.proxy.rlwy.net", "root", "tCowNBAOpxdSWVPMHEpdEIFJJMCGzftz", "railway", 22392);
 
-                $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos";
-                $result = $conn->query($sql);
-                
-                // Verificar si hay resultados
-                if ($result->num_rows > 0) {
-                    // Generar el HTML para cada producto
-                    while($row = $result->fetch_assoc()) {
-                        echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
-                        echo '<img src="files/productos/' . $row['imagen'] . '" alt="' . $row['nombre'] . '">';
-                        echo '<div class="textCard">';
-                        echo '<h2 class="titleProduct">' . $row['nombre'] . '</h2>';
-                        echo '<p>' . $row['descripcion'] . '</p>';
-                        echo '</div>';
-                        echo '<p class="price">$' . $row['precio'] . '</p>';
-                        echo '<form id="purchaseForm" onsubmit="handlePurchase(event)">'; 
-                        echo '<button type="submit" class="btn-add-cart">Comprar</button>';
-                        echo '</form>';                        
-                        echo '</div>';
-                    }
-                } else {
-                    echo "No hay productos disponibles.";
-                }
+                 // Consultar los productos cuyo valor de 'activo' sea 1
+                 $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos WHERE activo = 1";
+                 $result = $conn->query($sql);
+                 
+                 // Verificar si hay resultados
+                 if ($result->num_rows > 0) {
+                     // Generar el HTML para cada producto
+                     while($row = $result->fetch_assoc()) {
+                         // Obtener la imagen BLOB y convertirla a base64
+                         $imagen = base64_encode($row['imagen']);
+                         echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
+                         echo '<img src="data:image/jpeg;base64,' . $imagen . '" alt="' . $row['nombre'] . '">'; // Mostrar la imagen en formato base64
+                         echo '<div class="textCard">';
+                         echo '<h2 class="titleProduct">' . $row['nombre'] . '</h2>';
+                         echo '<p>' . $row['descripcion'] . '</p>';
+                         echo '</div>';
+                         echo '<p class="price">$' . $row['precio'] . '</p>';
+                         echo '<form id="purchaseForm" onsubmit="handlePurchase(event)">'; 
+                         echo '<button type="submit" class="btn-add-cart">Comprar</button>';
+                         echo '</form>';                        
+                         echo '</div>';
+                     }
+                 } else {
+                     echo "No hay productos disponibles.";
+                 }
             ?>
         </div>
     </main>

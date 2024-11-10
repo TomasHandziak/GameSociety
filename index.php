@@ -5,7 +5,7 @@
     if (isset($_SESSION['username'])) {
         echo '
         <script>
-        window.location = "../index_login.php";
+        window.location = "index_login.php";
         </script>
     ';  
     }

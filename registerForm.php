@@ -18,7 +18,7 @@
             <input type="text" id="username" name="username" required>
             
             <label for="mail">Correo Electronico:</label>
-            <input type="text" id="mail" name="mail" required>
+            <input type="email" id="mail" name="mail" required>
             
             <label for="password">Contrasena:</label>
             <input type="password" id="password" name="password" required>

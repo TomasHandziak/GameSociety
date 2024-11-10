@@ -127,36 +127,40 @@
 
         <div id="productContainer" class="table-view">
             <?php
-                $conn = mysqli_connect("junction.proxy.rlwy.net", "root", "WqyHgwxnQkrHoyLvRAMYzRmWyXfaNoKi", "railway", 59235);
+                    // Crear la conexión
+                    $conn = mysqli_connect("localhost", "root", "", "gamesociety");
 
-                $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos";
-                $result = $conn->query($sql);
-                
-                
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
-                        echo '<img src="files/productos/' . $row['imagen'] . '" alt="' . $row['nombre'] . '">';
-                        echo '<div class="textCard">';
-                        echo '<h2 class="titleProduct">' . $row['nombre'] . '</h2>';
-                        echo '<p>' . $row['descripcion'] . '</p>';
-                        echo '</div>';
-                        echo '<p class="price">$' . $row['precio'] . '</p>';
-                        echo '<form id="purchaseForm" action="comprar.php" method="POST">';
-                        echo '<input type="hidden" id="idProducto" name="idProducto" value="' . $row['id'] . '">';
-                        echo '<input type="hidden" id="titulo" name="titulo" value="' . $row['nombre'] . '">';
-                        echo '<input type="hidden" id="idUsuario" name="idUsuario" value="' . $_SESSION['id'] . '">';
-                        echo '<input type="hidden" id="usuario" name="usuario" value="' . $_SESSION['username'] . '">';
-                        echo '<input type="hidden" id="precio" name="precio" value="' . $row['precio'] . '">';
-                        echo '<button type="submit" class="btn-add-cart">Comprar</button>';
-                        echo '</form>';                        
-                        echo '</div>';
+                    // Consultar los productos cuyo valor de 'activo' sea 1
+                    $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos WHERE activo = 1";
+                    $result = $conn->query($sql);
+                    
+                    // Verificar si hay resultados
+                    if ($result->num_rows > 0) {
+                        // Generar el HTML para cada producto
+                        while($row = $result->fetch_assoc()) {
+                            // Obtener la imagen BLOB y convertirla a base64
+                            $imagen = base64_encode($row['imagen']);
+                            echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
+                            echo '<img src="data:image/jpeg;base64,' . $imagen . '" alt="' . $row['nombre'] . '">'; // Mostrar la imagen en formato base64
+                            echo '<div class="textCard">';
+                            echo '<h2 class="titleProduct">' . $row['nombre'] . '</h2>';
+                            echo '<p>' . $row['descripcion'] . '</p>';
+                            echo '</div>';
+                            echo '<p class="price">$' . $row['precio'] . '</p>';
+                            echo '<form id="purchaseForm" action="comprar.php" method="POST">';
+                            echo '<input type="hidden" id="idProducto" name="idProducto" value="' . $row['id'] . '">';
+                            echo '<input type="hidden" id="titulo" name="titulo" value="' . $row['nombre'] . '">';
+                            echo '<input type="hidden" id="idUsuario" name="idUsuario" value="' . $_SESSION['id'] . '">';
+                            echo '<input type="hidden" id="usuario" name="usuario" value="' . $_SESSION['username'] . '">';
+                            echo '<input type="hidden" id="precio" name="precio" value="' . $row['precio'] . '">';
+                            echo '<button type="submit" class="btn-add-cart">Comprar</button>';
+                            echo '</form>';                           
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "No hay productos disponibles.";
                     }
-                } else {
-                    echo "No hay productos disponibles.";
-                }
-
-            ?>
+                ?>
         </div>
        
     </main>
