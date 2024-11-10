@@ -8,8 +8,8 @@ $mail = $_POST['mail'];
 $password = $_POST['password'];
 $password = hash('sha512', $password);
 
-// Modifica la consulta para obtener el ID del usuario
-$validarLogin = mysqli_query($conexion, "SELECT id, email FROM usuarios WHERE email='$mail' and contrasena='$password'");
+// Modifica la consulta para validar que el campo admin sea false (0)
+$validarLogin = mysqli_query($conexion, "SELECT id, email, admin FROM usuarios WHERE email='$mail' and contrasena='$password' AND admin = 0");
 
 if(mysqli_num_rows($validarLogin) > 0){ 
     $usuario = mysqli_fetch_assoc($validarLogin); // Obtener los datos del usuario
@@ -25,7 +25,7 @@ if(mysqli_num_rows($validarLogin) > 0){
 } else {
     echo '
         <script>
-        alert("Usuario no existe");
+        alert("Usuario no existe o no tiene permisos de acceso.");
         window.location = "../form.php";
         </script>
     ';      

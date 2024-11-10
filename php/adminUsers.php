@@ -9,12 +9,17 @@ if (isset($_POST['add_admin'])) {
     $password = mysqli_real_escape_string($conexion, $_POST['password']);
     $hashed_password = hash('sha512', $password); // Encriptar la contraseña
 
-    // Verificar si el correo o nombre de usuario ya existen
-    $check_query = "SELECT * FROM usuarios WHERE email = '$email' OR username = '$username'";
+    // Verificar si el correo o nombre de usuario ya existen, pero solo para cuentas de administradores
+    $check_query = "SELECT * FROM usuarios WHERE (email = '$email' OR username = '$username') AND admin = 1";
     $result = mysqli_query($conexion, $check_query);
 
     if (mysqli_num_rows($result) > 0) {
-        echo "El correo o nombre de usuario ya están en uso. Por favor, elige otro.";
+        echo "El correo o nombre de usuario ya están en uso por otro administrador. Por favor, elige otro.";
+        echo '
+                <script>
+                window.location = "../gestionar_admin.php";
+                </script>
+            ';  
     } else {
         // Insertar el nuevo administrador
         $insert_query = "INSERT INTO usuarios (nombre, email, username, contrasena, admin) VALUES ('$nombre', '$email', '$username', '$hashed_password', 1)";
@@ -32,3 +37,4 @@ if (isset($_POST['add_admin'])) {
     }
 }
 ?>
+        

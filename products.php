@@ -15,14 +15,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script>
         function handlePurchase(event) {
-            // Prevenir el envío del formulario
+            
             event.preventDefault();
 
-            // Comprobar si el usuario está autenticado
+            
             <?php if (!isset($_SESSION['username'])): ?>
                 alert('Debes iniciar sesión para comprar.');
             <?php else: ?>
-                // Si el usuario está autenticado, enviar el formulario
+                
                 event.target.submit();
             <?php endif; ?>
         }
@@ -92,21 +92,21 @@
 
         <div id="productContainer" class="table-view">
             <?php
-                 // Crear la conexión
+                 
                  $conn = new mysqli("autorack.proxy.rlwy.net", "root", "tCowNBAOpxdSWVPMHEpdEIFJJMCGzftz", "railway", 22392);
 
-                 // Consultar los productos cuyo valor de 'activo' sea 1
+                 
                  $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos WHERE activo = 1";
                  $result = $conn->query($sql);
                  
-                 // Verificar si hay resultados
+                 
                  if ($result->num_rows > 0) {
-                     // Generar el HTML para cada producto
+                    
                      while($row = $result->fetch_assoc()) {
-                         // Obtener la imagen BLOB y convertirla a base64
+                         
                          $imagen = base64_encode($row['imagen']);
                          echo '<div class="product-card card" id="producto' . $row['id'] . '" data-category="' . $row['categoria'] . '">';
-                         echo '<img src="data:image/jpeg;base64,' . $imagen . '" alt="' . $row['nombre'] . '">'; // Mostrar la imagen en formato base64
+                         echo '<img src="data:image/jpeg;base64,' . $imagen . '" alt="' . $row['nombre'] . '">'; 
                          echo '<div class="textCard">';
                          echo '<h2 class="titleProduct">' . $row['nombre'] . '</h2>';
                          echo '<p>' . $row['descripcion'] . '</p>';

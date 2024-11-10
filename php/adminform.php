@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Contraseña incorrecta.";
         }
     } else {
-        echo "Usuario no encontrado o no es administrador.";
+        echo '<script> alert("Usuario no encontrado");</script>';
         header('Location: ../admin.php');
     }
 }
