@@ -128,7 +128,7 @@
         <div id="productContainer" class="table-view">
             <?php
                     // Crear la conexión
-                    $conn = mysqli_connect("localhost", "root", "", "gamesociety");
+                    $conn = new mysqli("autorack.proxy.rlwy.net", "root", "tCowNBAOpxdSWVPMHEpdEIFJJMCGzftz", "railway", 22392);
 
                     // Consultar los productos cuyo valor de 'activo' sea 1
                     $sql = "SELECT id, nombre, descripcion, precio, imagen, categoria FROM productos WHERE activo = 1";
