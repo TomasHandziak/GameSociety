@@ -82,7 +82,7 @@ $usuario = mysqli_fetch_assoc($result_usuario);
 
     <nav>
         <ul>
-            <li><a href="indexadmin.php">Volver al Panel de Admin</a></li>
+            <li><a href="indexAdmin.php">Volver al Panel de Admin</a></li>
             <li><a href="php/logout.php">Cerrar Sesión</a></li>
         </ul>
     </nav>
