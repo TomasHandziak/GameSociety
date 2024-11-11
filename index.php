@@ -49,7 +49,7 @@
         
         <h1>JUGÁ</h1><h2 class="subTitle">LO QUE QUIERAS</h2><br>
         <p>En GameSociety, somos tu socio de confianza para todas tus necesidades informáticas. Ofrecemos una amplia gama de insumos y accesorios de alta calidad para mantener tu equipo funcionando al máximo rendimiento. </p><br>
-        <a href="#" class="startButton">Comprá</a>
+        <a href="products.php" class="startButton">Comprá</a>
 
         
 
