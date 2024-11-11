@@ -136,7 +136,20 @@ $result = mysqli_query($conexion, $query);
         <input type="number" name="stock" min="0" required><br>
 
         <label for="categoria">Categoría:</label>
-        <input type="text" name="categoria" required><br>
+        <select name="categoria" required>
+            <option value="Teclados">Teclados</option>
+            <option value="Mouses">Mouses</option>
+            <option value="Monitores">Monitores</option>
+            <option value="Almacenamiento">Almacenamiento</option>
+            <option value="Procesadores">Procesadores</option>
+            <option value="Memorias RAM">Memorias RAM</option>
+            <option value="Placas de Video">Placas de Video</option>
+            <option value="Fuentes de Poder">Fuentes de Poder</option>
+            <option value="Gabinetes">Gabinetes</option>
+            <option value="Auriculares">Auriculares</option>
+            <option value="gabinetes">Gabinetes</option>
+            <option value="procesadores">Procesadores</option>
+        </select>
 
         <label for="imagen">Imagen del Producto:</label>
         <input type="file" name="imagen" accept="image/*" required><br>
