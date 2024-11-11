@@ -5,7 +5,12 @@ include 'php/conexion_be.php'; // Asegúrate de incluir el archivo de conexión 
 // Verificar si hay una sesión activa
 if (!isset($_SESSION['id'])) {
     // Si no hay sesión, redirigir al login
-    header('Location: form.php');
+    echo '
+        <script> 
+            alert("Debes iniciar sesion");
+            window.location = "form.php";
+        </script>
+        ';
     exit();
 }
 
@@ -28,7 +33,12 @@ if (mysqli_num_rows($result) == 1) {
     }
 } else {
     // Si no se encuentra el usuario en la base de datos
-    header('Location: form.php');
+    echo '
+        <script> 
+            alert("Debes iniciar sesion");
+            window.location = "form.php";
+        </script>
+        ';
     exit();
 }
 

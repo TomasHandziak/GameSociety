@@ -4,7 +4,11 @@
     
     // Verificar si hay una sesión activa
     if (!isset($_SESSION['id'])) {
-        header('Location: form.php');
+        echo '
+            <script>
+            window.location = "form.php";
+            </script>
+        '; 
         exit();
     }
     
@@ -18,11 +22,20 @@
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         if ($row['admin'] != 1) {
-            header('Location: index_login.php'); // Redirige si no es admin
+            echo '
+                <script>
+                window.location = "index_login.php";
+                </script>
+            ';  // Redirige si no es admin
             exit();
         }
     } else {
-        header('Location: form.php');
+        echo '
+        <script> 
+            alert("Debes iniciar sesion");
+            window.location = "form.php";
+        </script>
+        ';
         exit();
     }
 
@@ -36,7 +49,11 @@
         } else {
             echo "Error al completar el pedido: " . mysqli_error($conexion);
         }
-        header("Location: indexAdmin.php");
+        echo '
+            <script>
+            window.location = "indexAdmin.php";
+            </script>
+        '; 
         exit();
     }
 
