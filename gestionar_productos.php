@@ -115,6 +115,7 @@ $result = mysqli_query($conexion, $query);
     <nav>
         <ul>
             <li><a href="indexAdmin.php">Volver al Panel de Admin</a></li>
+            <li><a href="gestionar_admin.php">Gestionar Usuarios Admin</a></li>
             <li><a href="php/logout.php">Cerrar Sesión</a></li>
         </ul>
     </nav>

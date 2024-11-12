@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'php/conexion_be.php'; // Asegúrate de incluir el archivo de conexión a la base de datos
+include 'php/conexion_be.php'; 
 
-// Verificar si hay una sesión activa
+
 if (!isset($_SESSION['id'])) {
-    // Si no hay sesión, redirigir al login
+ 
     echo '
         <script> 
             alert("Debes iniciar sesion");
@@ -14,25 +14,29 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// Obtener el id del usuario desde la sesión
+
 $usuario_id = $_SESSION['id'];
 
-// Consulta para verificar si el usuario es administrador
+
 $query = "SELECT admin FROM usuarios WHERE id = '$usuario_id'";
 $result = mysqli_query($conexion, $query);
 
-// Verificar si el usuario existe en la base de datos
 if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_assoc($result);
     
-    // Si el usuario no es administrador, redirigir
+ 
     if ($row['admin'] != 1) {
-        // No es administrador, redirigir a una página de acceso denegado o al inicio
-        header('Location: index_login.php'); // O cualquier otra página que elijas
+        
+        echo '
+        <script> 
+            alert("Debes iniciar sesion");
+            window.location = "form.php";
+        </script>
+        '; 
         exit();
     }
 } else {
-    // Si no se encuentra el usuario en la base de datos
+    
     echo '
         <script> 
             alert("Debes iniciar sesion");
@@ -67,7 +71,12 @@ if (isset($_GET['id'])) {
     }
 
     // Redirigir a la misma página después de la eliminación
-    header("Location: gestionar_admin.php");
+    echo '
+        <script> 
+            alert("Debes iniciar sesion");
+            window.location = "gestionar_admin.php";
+        </script>
+        ';
     exit();
 }
 
@@ -89,6 +98,7 @@ if (isset($_GET['id'])) {
     <nav>
         <ul>
             <li><a href="indexAdmin.php">Volver al Panel de Admin</a></li>
+            <li><a href="gestionar_productos.php">Gestionar Productos</a></li>
             <li><a href="php/logout.php">Cerrar Sesión</a></li>
         </ul>
     </nav>
